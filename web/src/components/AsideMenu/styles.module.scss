@@ -1,0 +1,158 @@
+$asideMenu-width: 300px; 
+
+.asideMenu {
+  width: $asideMenu-width;
+  position: relative;
+  background-color: #1C3766;
+  color: white;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.9rem 0;
+
+  header {
+    align-items: center;
+    display: flex;
+    min-width: 140px;
+
+    h1 {
+      font-size: 1rem;
+    }
+
+    div {
+      position: absolute;
+      right: 15px;
+      cursor: pointer;
+
+      transition: right .1s ease .2s;
+    }
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    li {
+      padding: 5px;
+      position: relative;
+      width: fit-content;
+
+      display: flex;
+      align-items: center;
+
+      
+      &::before {
+        content: '';
+        position: absolute;
+        background-color: white;
+        height: 2px;
+        width: 0;
+        bottom: 0;
+
+        transition: .5s ease;
+      }
+
+      &:hover {
+        &::before {
+          width: calc(100% - 5px);
+        }
+      }
+    }
+  }
+
+  footer {
+    button {
+      background: #D0E1FD;
+      border: none;
+      padding: 10px 30px;
+      color: #375b92;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      transition: filter .2s;
+
+      &:hover {
+        filter: brightness(0.95)
+      }
+    }
+  }
+}
+
+@keyframes collapse {
+  from {
+    width: $asideMenu-width;
+  }
+
+  to {
+    width: 0;
+  }
+}
+
+@keyframes expand {
+  to {
+    width: $asideMenu-width;
+  }
+  from {
+    width: 0;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+  from {
+    opacity: 0;
+  }
+}
+
+.asideMenu:not(.collapsed) {
+  animation: expand .4s ease-out forwards;
+  header {
+    div {
+      animation: fadeIn 1s;
+      animation-delay: .1s;
+    }
+  }
+}
+
+.asideMenu.collapsed {
+  animation: collapse .4s ease-out forwards;
+
+  header {
+    h1 {
+      animation: fadeOut .4s forwards;
+    }   
+  }
+
+  .links {
+    animation: fadeOut .4s forwards;
+  }  
+
+  footer {
+    animation: fadeOut .4s forwards;
+  }
+
+  header {
+    div {
+      right: -35px;
+      padding: 10px;
+      background-color: #1C3766;
+      border-radius: 8px;
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
