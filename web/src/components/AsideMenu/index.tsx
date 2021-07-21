@@ -1,18 +1,18 @@
 import { useState } from 'react'
 import { AiOutlineMenuFold } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
+import { routes } from '../../routes'
 
 import styles from './styles.module.scss'
 
-interface AsideMenuLink {
-  path: string
-  title: string
-}
+const links = [
+  { title: 'Home', path: routes.home },
+  { title: 'Livros', path: routes.books },
+  { title: 'Funcionários', path: routes.employees },
+  { title: 'Minha Conta', path: routes.myaccount }
+]
 
-interface AsideMenuProps {
-  links: AsideMenuLink[]
-}
-
-export function AsideMenu({ links,  }: AsideMenuProps) {
+export function AsideMenu() {
   const [isCollapsed, setIsCollapsed] = useState(false)
   
   function handleCollapseMenu() {
@@ -34,7 +34,7 @@ export function AsideMenu({ links,  }: AsideMenuProps) {
       <ul className={styles.links}>
         {links.map(link => (
           <li key={link.title}>
-            <a href={link.path}>{link.title}</a>
+            <Link to={link.path}>{link.title}</Link>
           </li>
         ))}
       </ul>
