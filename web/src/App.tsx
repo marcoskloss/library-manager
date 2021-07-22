@@ -6,6 +6,7 @@ import { MyAccount } from './pages/MyAccount';
 
 import pageContainerStyles from './styles/pageContainer.module.scss'
 import { AsideMenu } from './components/AsideMenu';
+import { Books } from './pages/Books';
 
 function App() {
   const { pathname } = useLocation()
@@ -20,6 +21,10 @@ function App() {
 
           <Route path={routes.myaccount}>
             <MyAccount />
+          </Route>
+
+          <Route path={routes.books}>
+            <Books />
           </Route>
 
           <Route path={routes.home}>

@@ -1,0 +1,53 @@
+.container {
+  width: calc(100% - 300px);
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 4rem;
+
+  button {
+    background-color: #27c983;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    font-size: 1rem;
+    border-radius: 4px; 
+    transition: filter .4s;
+
+    &:hover {
+      filter: brightness(0.95);
+    }
+  }
+}
+
+.table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: calc(100% - 8rem);
+
+  td, th {
+    border: 1px solid black;
+    padding: 0.625rem;
+  }
+  
+  thead {
+    background: #b3b3b3;
+  }
+
+  tbody {
+    tr {
+      transition: background .2s;
+      
+      &:hover {
+        background: #dfdfdf;
+      }
+    } 
+  }
+}
