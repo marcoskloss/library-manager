@@ -1,20 +1,32 @@
+import { Switch, Route, useLocation } from 'react-router-dom';
 import { Login } from './pages/Login'
-import { Dashboard } from './pages/Dashboard';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { routes } from './routes';
+import { MyAccount } from './pages/MyAccount';
+
+import pageContainerStyles from './styles/pageContainer.module.scss'
+import { AsideMenu } from './components/AsideMenu';
 
 function App() {
+  const { pathname } = useLocation()
+  
   return (
-    <Router>
-      <Switch>
-        <Route path='/login'>
-          <Login />
-        </Route>
+    <div className={pageContainerStyles.pageContainer}>
+      { !/login/.test(pathname) && (<AsideMenu />) }
+        <Switch>
+          <Route path={routes.login}>
+            <Login />
+          </Route>
 
-        <Route path='/'>
-          <Dashboard />
-        </Route>
-      </Switch>
-    </Router>
+          <Route path={routes.myaccount}>
+            <MyAccount />
+          </Route>
+
+          <Route path={routes.home}>
+            <Home />
+          </Route>
+        </Switch>
+    </div>
   );
 }
 

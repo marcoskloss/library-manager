@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AiOutlineMenuFold } from 'react-icons/ai'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { routes } from '../../routes'
 
 import styles from './styles.module.scss'
@@ -13,11 +13,16 @@ const links = [
 ]
 
 export function AsideMenu() {
+  const history = useHistory()
+
   const [isCollapsed, setIsCollapsed] = useState(false)
   
   function handleCollapseMenu() {
     setIsCollapsed(prevState => !prevState)
-    console.log('col')
+  }
+
+  function handleSignOut() {
+    history.push('/login')
   }
   
   return (
@@ -40,7 +45,7 @@ export function AsideMenu() {
       </ul>
 
       <footer>
-        <button>Sair</button>
+        <button onClick={handleSignOut}>Sair</button>
       </footer>
     </aside>
   )
