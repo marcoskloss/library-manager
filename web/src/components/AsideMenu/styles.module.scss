@@ -34,15 +34,17 @@ $asideMenu-width: 300px;
   .links {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
 
     li {
-      padding: 5px;
       position: relative;
       width: fit-content;
-
       display: flex;
       align-items: center;
+
+      a {
+        padding: 10px;
+      }
 
       
       &::before {
