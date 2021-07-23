@@ -6,7 +6,8 @@ import { MyAccount } from './pages/MyAccount';
 
 import pageContainerStyles from './styles/pageContainer.module.scss'
 import { AsideMenu } from './components/AsideMenu';
-import { Books } from './pages/Books';
+import { BooksList } from './pages/Books/List';
+import { BookDetails } from './pages/Books/Details';
 
 function App() {
   const { pathname } = useLocation()
@@ -15,21 +16,18 @@ function App() {
     <div className={pageContainerStyles.pageContainer}>
       { !/login/.test(pathname) && (<AsideMenu />) }
         <Switch>
-          <Route path={routes.login}>
-            <Login />
-          </Route>
+          <Route path={routes.login} component={Login} exact />
 
-          <Route path={routes.myaccount}>
-            <MyAccount />
-          </Route>
-
-          <Route path={routes.books}>
-            <Books />
-          </Route>
-
-          <Route path={routes.home}>
-            <Home />
-          </Route>
+          <Route path={routes.myaccount} component={MyAccount} exact />
+          
+          <Route path={routes.books} component={BooksList} exact />
+          <Route 
+            path={`${routes.books}/details/:id`} 
+            component={BookDetails} 
+            exact 
+          />
+          
+          <Route path={routes.home} component={Home} exact/>
         </Switch>
     </div>
   );
