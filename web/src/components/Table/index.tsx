@@ -1,32 +1,49 @@
 import styles from './styles.module.scss'
 
-export function Table() {
+export interface ITh {
+  name: string
+  title: string
+  order: number
+}
+
+export interface ILine {
+  id: string
+  [key: string]: string | number
+}
+
+export interface ITableProps {
+  thList: ITh[]
+  body: ILine[]
+ }
+
+export function Table({ thList, body }: ITableProps) {
   return (
     <table className={styles.table}>
       <thead>
         <tr>
-          <th>Título</th>
-          <th>Autor</th>
-          <th>Quantidade</th>
-          <th>Categoria</th>
-          <th>Status</th>
+          { thList.map(it => <th key={it.name}>{it.title}</th>) }
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Titulo teste</td>
-          <td>Autor teste</td>
-          <td>7</td>
-          <td>Ação</td>
-          <td>Disponível</td>
-        </tr>
-        <tr>
-          <td>O Cortiço</td>
-          <td>Aluísio</td>
-          <td>0</td>
-          <td>Romance</td>
-          <td>Indisponível</td>
-        </tr>
+        { body.map(line => {
+          return (
+            <tr key={line.id}>
+              { thList.map(th => {
+                const value = line[th.name]
+                return (
+                  <td 
+                    key={line.id + th.name}
+                    className={
+                      `${typeof value === 'number' ? styles.tdNumber : ''}`
+                    }
+                  >
+                    {value}
+                  </td>
+                )
+              }) }
+            </tr>
+          )
+        }) }
       </tbody>
     </table>
   )
