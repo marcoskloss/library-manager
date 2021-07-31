@@ -1,6 +1,5 @@
 import { useHistory, useRouteMatch } from 'react-router'
 import styles from './styles.module.scss'
-import globalButtonStyles from '../../../styles/button.module.scss'
 import { routes } from '../../../routes'
 
 interface IParams {
@@ -19,17 +18,17 @@ export function BookDetails() {
     <div className={styles.container}>
       <header className={styles.header}>
         <h1>
-          {id === 'new' ? 'Adicionar' : 'Editar'} - Livro
+          {id ? 'Editar' : 'Adicionar'} - Livro
         </h1>
         <div className={styles.actionsContainer}>
           <button 
-            className={globalButtonStyles.backBtn}
+            className='backBtn'
             onClick={handleBack}
           >
             Voltar
           </button>
-          <button className={globalButtonStyles.deleteBtn}>Excluir</button>
-          <button className={globalButtonStyles.addBtn}>Salvar</button>
+          <button className='deleteBtn'>Excluir</button>
+          <button className='addBtn'>Salvar</button>
         </div>
       </header>
 

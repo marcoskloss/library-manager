@@ -4,8 +4,8 @@ $asideMenu-width: 300px;
   width: $asideMenu-width;
   height: 100vh;
   position: relative;
-  background-color: #1C3766;
-  color: white;
+  background-color: var(--main-asideMenu-bg);
+  color: var(--main-asideMenu-text); 
   
   display: flex;
   flex-direction: column;
@@ -20,6 +20,7 @@ $asideMenu-width: 300px;
 
     h1 {
       font-size: 1rem;
+        color: var(--main-asideMenu-text); 
     }
 
     div {
@@ -50,7 +51,7 @@ $asideMenu-width: 300px;
       &::before {
         content: '';
         position: absolute;
-        background-color: white;
+        background-color: var(--main-asideMenu-text); 
         height: 2px;
         width: 0;
         bottom: 0;
@@ -68,10 +69,8 @@ $asideMenu-width: 300px;
 
   footer {
     button {
-      background: #D0E1FD;
       border: none;
       padding: 10px 30px;
-      color: #375b92;
       font-size: 0.8rem;
       border-radius: 4px;
       transition: filter .2s;
@@ -151,7 +150,7 @@ $asideMenu-width: 300px;
     div {
       right: -35px;
       padding: 10px;
-      background-color: #1C3766;
+      background-color: var(--main-asideMenu-bg);
       border-radius: 8px;
       svg {
         transform: rotate(180deg);

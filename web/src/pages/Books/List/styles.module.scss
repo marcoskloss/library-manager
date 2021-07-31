@@ -13,8 +13,8 @@
   padding: 2rem 4rem;
 
   button {
-    background-color: #27c983;
-    color: white;
+    background-color: var(--main-addBtn-bg);
+    color: var(--secondary-button-text);
     border: none;
     padding: 10px 30px;
     font-size: 1rem;
@@ -38,7 +38,7 @@
   }
   
   thead {
-    background: #b3b3b3;
+    background: var(--main-thead-bg);
   }
 
   tbody {
@@ -46,7 +46,7 @@
       transition: background .2s;
       
       &:hover {
-        background: #dfdfdf;
+        background: var(--main-tr-hover);
       }
     } 
   }

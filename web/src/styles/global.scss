@@ -1,3 +1,5 @@
+@import 'theme.scss';
+
 * {
   padding: 0;
   margin: 0;
@@ -7,9 +9,64 @@
 body {
   width: 100%;
   height: 100vh;
-  background: #F4F5F7;
-
+  background: var(--main-bg-color);
+  color: var(--main-text-color);
   font-family: 'Montserrat', sans-serif;
+}
+
+button {
+  cursor: pointer;
+  color: var(--main-button-text);
+  background: var(--main-button-bg);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+li {
+  list-style: none;
+}
+
+h1 {
+  color: var(--main-title-color);
+}
+
+strong {
+  color: var(--main-strong-color);
+}
+
+label {
+  color: var(--main-label-color);
+}
+
+input, textarea {
+  color: var(--main-text-color);
+  font-size: 1rem;
+  border: none;
+  background: var(--main-input-bg);
+  outline-color: var(--main-outline-color);
+  outline-width: 2px;
+}
+
+.addBtn{
+  background: var(--main-addBtn-bg);
+}
+
+.deleteBtn {
+  background: var(--main-deleteBtn-bg);
+}
+
+.backBtn {
+  background: var(--main-backBtn-bg);
+}
+
+.pageContainer {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
 }
 
 @media screen and (max-width: 1080px) {
@@ -22,17 +79,4 @@ body {
   html {
     font-size: 87.5%; 
   }
-}
-
-button {
-  cursor: pointer;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-li {
-  list-style: none;
 }

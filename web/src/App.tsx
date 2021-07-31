@@ -4,7 +4,6 @@ import { Home } from './pages/Home';
 import { routes } from './routes';
 import { MyAccount } from './pages/MyAccount';
 
-import pageContainerStyles from './styles/pageContainer.module.scss'
 import { AsideMenu } from './components/AsideMenu';
 import { BooksList } from './pages/Books/List';
 import { BookDetails } from './pages/Books/Details';
@@ -13,7 +12,7 @@ function App() {
   const { pathname } = useLocation()
   
   return (
-    <div className={pageContainerStyles.pageContainer}>
+    <div className='pageContainer'>
       { !/login/.test(pathname) && (<AsideMenu />) }
         <Switch>
           <Route path={routes.login} component={Login} exact />

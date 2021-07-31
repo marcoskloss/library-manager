@@ -9,7 +9,7 @@
   }
   
   thead {
-    background: #b3b3b3;
+    background: var(--main-thead-bg);
   }
 
   tbody {
@@ -17,7 +17,7 @@
       transition: background .2s;
       
       &:hover {
-        background: #dfdfdf;
+        background: var(--main-tr-hover);
       }
     } 
   }

@@ -35,7 +35,7 @@ export function Login() {
           >
             Entrar
           </button>
-          <a href="/" className={styles.forgotPassword} >Esqueceu sua senha</a>
+          <a href="/" className={styles.forgotPassword}>Esqueci minha senha</a>
         </div>
       </form> 
     </div>
