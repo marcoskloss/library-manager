@@ -22,7 +22,7 @@ function App() {
           
           <Route path={routes.books} component={BooksList} exact />
           <Route 
-            path={`${routes.books}/details/:id`} 
+            path={`${routes.books}/details/:id?`} 
             component={BookDetails} 
             exact 
           />
