@@ -14,17 +14,28 @@ export interface ILine {
 export interface ITableProps {
   thList: ITh[]
   body: ILine[]
- }
+}
 
-export function Table({ thList, body }: ITableProps) {
+interface ITBodyProps {
+  body: ILine[]
+  thList: ITh[]
+}
+
+function TBody({body, thList}: ITBodyProps) {
+  if (!body.length) {
+    return (
+      <tr>
+        { thList.map(th => {
+          return (
+            <td key={th.name} className={styles.emptyBody}></td>
+          )
+        }) }
+      </tr>
+    )
+  }
+
   return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          { thList.map(it => <th key={it.name}>{it.title}</th>) }
-        </tr>
-      </thead>
-      <tbody>
+    <tbody>
         { body.map(line => {
           return (
             <tr key={line.id}>
@@ -44,7 +55,19 @@ export function Table({ thList, body }: ITableProps) {
             </tr>
           )
         }) }
-      </tbody>
+    </tbody>
+  )
+}
+
+export function Table({ thList , body }: ITableProps) {
+  return (
+    <table className={styles.table}>
+      <thead>
+        <tr>
+          { thList.map(it => <th key={it.name}>{it.title}</th>) }
+        </tr>
+      </thead>
+      <TBody body={body} thList={thList} />
     </table>
   )
 }

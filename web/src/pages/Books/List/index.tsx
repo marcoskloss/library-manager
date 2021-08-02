@@ -1,5 +1,7 @@
+import {useEffect, useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import { ILine, ITh, Table } from '../../../components/Table'
+import fakeServer from '../../../fakeServer/fake-server'
 import { routes } from '../../../routes'
 import styles from './styles.module.scss'
 
@@ -28,29 +30,31 @@ const thList: ITh[] = [
 
 export function BooksList() {
   const history = useHistory()
+  const [data, setData] = useState<ILine[]>([])
   
-  function getData(): ILine[] {
-    return [
-      { 
-        id: '1', 
-        author: 'Autor X', 
-        title: 'Livro X', 
-        amount: 7, 
-        status: 'Disponível'
-      },
-      { 
-        id: '2', 
-        author: 'Autor Y', 
-        title: 'Livro Y', 
-        amount: 0, 
-        status: 'Indisponível'
+  async function getData(): Promise<ILine[]> {
+    const response = await fakeServer.findAllBooks()
+    return response.map(item => {
+      return {
+        id: item.id,
+        title: item.title,
+        author: item.author,
+        amount: item.amount,
+          status: item.status
       }
-    ]
+    })
   }
 
   function handleAdd() {
     history.push(`${routes.books}/details/`)
   }
+
+  useEffect(() => {
+    (async () => {
+      const response = await getData()
+      setData(response)
+    })()
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -61,7 +65,7 @@ export function BooksList() {
 
       <Table
         thList={thList}
-        body={getData()}
+        body={data}
       />
     </div>
   )

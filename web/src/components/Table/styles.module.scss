@@ -13,6 +13,11 @@
     color: var(--main-asideMenu-text);
   }
 
+  .emptyBody {
+    color: red;
+    padding: 1.2rem;
+  }
+
   tbody {
     tr {
       transition: background .2s;
