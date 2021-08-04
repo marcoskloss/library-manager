@@ -1,5 +1,6 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { Header } from '../../../components/Header'
 import { ILine, ITh, Table } from '../../../components/Table'
 import fakeServer from '../../../fakeServer/fake-server'
 import { routes } from '../../../routes'
@@ -34,6 +35,7 @@ export function BooksList() {
   
   async function getData(): Promise<ILine[]> {
     const response = await fakeServer.findAllBooks()
+    console.log(response)
     return response.map(item => {
       return {
         id: item.id,
@@ -58,10 +60,12 @@ export function BooksList() {
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <h1>Livros</h1>
-        <button onClick={handleAdd}>Adicionar</button>
-      </header>
+      <Header 
+        title='Livros'
+        buttons={{
+          onAdd: handleAdd 
+        }}
+      />
 
       <Table
         thList={thList}

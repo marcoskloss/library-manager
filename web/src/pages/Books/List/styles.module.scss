@@ -7,26 +7,6 @@
   gap: 3rem;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding: 2rem 4rem;
-
-  button {
-    background-color: var(--main-addBtn-bg);
-    color: var(--secondary-button-text);
-    border: none;
-    padding: 10px 30px;
-    font-size: 1rem;
-    border-radius: 4px; 
-    transition: filter .4s;
-
-    &:hover {
-      filter: brightness(0.95);
-    }
-  }
-}
-
 .table {
   margin: 0 auto;
   border-collapse: collapse;
