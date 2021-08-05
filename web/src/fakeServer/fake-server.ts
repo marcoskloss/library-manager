@@ -1,14 +1,9 @@
-export enum BookStatus {
-  available = 'Disponível',
-  unavailable = 'Inisponível'
-}
-
 export interface BookModel {
   id: string
   author: string  
   title: string
   amount: number
-  status: BookStatus
+  status: string
 }
 
 interface IAsyncOperation<T> {
