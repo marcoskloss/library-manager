@@ -24,13 +24,15 @@ interface ITBodyProps {
 function TBody({body, thList}: ITBodyProps) {
   if (!body.length) {
     return (
-      <tr>
-        { thList.map(th => {
-          return (
-            <td key={th.name} className={styles.emptyBody}></td>
-          )
-        }) }
-      </tr>
+      <tbody>
+        <tr>
+          { thList.map(th => {
+            return (
+              <td key={th.name} className={styles.emptyBody}></td>
+            )
+          }) }
+        </tr>
+      </tbody>
     )
   }
 
