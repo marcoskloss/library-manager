@@ -1,9 +1,10 @@
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
 import { useHistory, useRouteMatch } from 'react-router'
 import styles from './styles.module.scss'
 import { routes } from '../../../routes'
 import fakeServer from '../../../fakeServer/fake-server'
-import {Header} from '../../../components/Header'
+import { Header } from '../../../components/Header'
+import { Form } from '../../../components/Form'
 
 interface IParams {
   id: string
@@ -61,7 +62,7 @@ export function BookDetails() {
       />
 
       <main className={styles.formContainer}>
-        <form onSubmit={async (ev) => {
+        <Form onSubmit={async (ev) => {
           ev.preventDefault()
           handleSubmit()
          }}
@@ -99,7 +100,7 @@ export function BookDetails() {
             </div>
           </div>
           <button className='addBtn' type='submit'>Salvar</button>
-        </form>
+        </Form>
       </main>
     </div>
   )

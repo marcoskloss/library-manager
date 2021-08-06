@@ -4,7 +4,6 @@ import './styles/global.scss'
 
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
-import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,4 +14,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-reportWebVitals();

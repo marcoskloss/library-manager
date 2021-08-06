@@ -35,7 +35,6 @@ export function BooksList() {
   
   async function getData(): Promise<ILine[]> {
     const response = await fakeServer.findAllBooks()
-    console.log(response)
     return response.map(item => {
       return {
         id: item.id,
