@@ -1,13 +1,20 @@
-import { createContext, ReactNode, useRef } from 'react' 
+import { createContext, forwardRef, ForwardRefRenderFunction, ReactNode, useContext, useImperativeHandle, useRef } from 'react' 
 
 interface IFormContext {
   register: (field: IFormField) => void
-    setValue: (name: string, value: any) => boolean,
-    setFocus: (name: string) => boolean
+  setValue: (name: string, value: any) => boolean,
+  setFocus: (name: string) => boolean
 }
 
 interface IFormProviderProps {
   children: ReactNode
+}
+
+
+export interface IFormRef {
+  register: (field: IFormField) => void
+  setValue: (name: string, value: any) => boolean,
+  setFocus: (name: string) => boolean
 }
 
 interface IFormField {
@@ -17,7 +24,9 @@ interface IFormField {
 
 const FormContext = createContext({} as IFormContext)
 
-export function FormContextProvider({ children }: IFormProviderProps) {
+const FormContextProviderElement: ForwardRefRenderFunction<
+  IFormRef, IFormProviderProps
+  > = ( { children }, formRef) =>  {
   const formFields = useRef<IFormField[]>([])
 
   function getFieldByName( name: string): IFormField | undefined {
@@ -47,6 +56,12 @@ export function FormContextProvider({ children }: IFormProviderProps) {
     return true
   }
 
+  useImperativeHandle<{}, IFormRef>(formRef, () => ({
+    register,
+    setValue,
+    setFocus
+  }))
+
   return (
     <FormContext.Provider value={{
       register,
@@ -57,3 +72,10 @@ export function FormContextProvider({ children }: IFormProviderProps) {
     </FormContext.Provider>
   )
 }
+
+export function useForm(): IFormContext {
+  const context = useContext(FormContext)
+  return context
+}
+
+export const FormContextProvider = forwardRef(FormContextProviderElement)
