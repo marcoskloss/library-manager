@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useHistory, useRouteMatch } from 'react-router'
 import styles from './styles.module.scss'
 import { routes } from '../../../routes'
 import fakeServer from '../../../fakeServer/fake-server'
 import { Header } from '../../../components/Header'
 import { Form } from '../../../components/Form'
+import { InputText } from '../../../components/Inputs/InputText'
+import {IFormRef} from '../../../components/Form/Hooks/FormContext'
 
 interface IParams {
   id: string
@@ -17,6 +19,8 @@ export function BookDetails() {
   const [author, setAuthor] = useState('')
   const [title, setTitle] = useState('')
   const [amount, setAmount] = useState(0)
+
+  const formRef = useRef<IFormRef>(null)
   
   function handleBack(): void {
     history.push(routes.books)
@@ -48,6 +52,10 @@ export function BookDetails() {
       alert('erro delete')
     }
   }
+
+  useEffect(() => {
+    formRef.current?.setFocus('title') 
+  }, [])
   
   return (
     <div className={styles.container}>
@@ -61,19 +69,16 @@ export function BookDetails() {
         }}
       />
 
-      <main className={styles.formContainer}>
-        <Form onSubmit={async (ev) => {
-          ev.preventDefault()
-          handleSubmit()
-         }}
-        >
+        <main className={styles.formContainer}>
+        <Form onSubmit={handleSubmit} ref={formRef}>
           <div className={styles.formGroup}>
             <label htmlFor="title">Título</label>
-            <input 
+            <InputText
               id='title' 
+              name='title'
               type="text" 
               value={title}
-              onChange={(ev) => setTitle(ev.target.value)}
+              onChange={(ev: ChangeEvent<HTMLInputElement>) => setTitle(ev.target.value)}
             />
           </div>
          
