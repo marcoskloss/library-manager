@@ -13,8 +13,10 @@ interface IFormProviderProps {
 
 export interface IFormRef {
   register: (field: IFormField) => void
-  setValue: (name: string, value: any) => boolean,
+  setValue: (name: string, value: any) => boolean
   setFocus: (name: string) => boolean
+  getValue<T = any>(name: string): T | undefined
+  getData<T = any>(): T
 }
 
 interface IFormField {
@@ -48,6 +50,18 @@ const FormContextProviderElement: ForwardRefRenderFunction<
     return false
   }
 
+  function getData<T = any>(): T {
+    const data: T = {} as T 
+    formFields.current.forEach(field => {
+      console.log(field)
+      Object.defineProperty(data, field.name, {
+        value: field.ref.current?.value
+      })
+    })
+
+    return data 
+  }
+
   function setFocus(name: string): boolean { 
     const fieldRef = getFieldByName(name)?.ref
     if (!fieldRef) return false
@@ -56,10 +70,16 @@ const FormContextProviderElement: ForwardRefRenderFunction<
     return true
   }
 
+  function getValue<T = any>(name: string): T | undefined {
+    return getFieldByName(name)?.ref.current?.value
+  }
+
   useImperativeHandle<{}, IFormRef>(formRef, () => ({
     register,
     setValue,
-    setFocus
+    setFocus,
+    getValue,
+    getData
   }))
 
   return (
