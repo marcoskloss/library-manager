@@ -1,5 +1,6 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useHistory, useRouteMatch } from 'react-router'
+import * as yup from 'yup'
 import styles from './styles.module.scss'
 import { routes } from '../../../routes'
 import fakeServer from '../../../fakeServer/fake-server'
@@ -16,10 +17,6 @@ export function BookDetails() {
   const {params: { id }} = useRouteMatch<IParams>()
   const history = useHistory()
 
-  const [author, setAuthor] = useState('')
-  const [title, setTitle] = useState('')
-  const [amount, setAmount] = useState(0)
-
   const formRef = useRef<IFormRef>(null)
   
   function handleBack(): void {
@@ -28,19 +25,24 @@ export function BookDetails() {
 
   async function handleSubmit(): Promise<void> {
     try {
-      await fakeServer.storeNewBook({
-        id: new Date().getTime().toString(),
-        title,
-        status: 'Disponível',
-        amount,
-        author
+      const data = formRef.current?.getData()
+
+      const schema = yup.object().shape({
+        title: yup.string().required('O Título é obrigatório!'),
+        author: yup.string().required('O Autor é obrigatório!'),
+        amount: yup.number().required('A Quantidade é obrigatória!')
       })
+
+      
+      await schema.validate(data, { abortEarly: false })
+
+      await fakeServer.storeNewBook(data)
 
       alert('Adicionado com sucesso!')
       handleBack()
     } catch (err) {
-      console.log(err)
-      alert('Não foi possível adicionar :/')
+      if (err instanceof yup.ValidationError)
+        formRef.current?.setFormErrors(err)
     }
   }
 
@@ -52,7 +54,7 @@ export function BookDetails() {
       alert('erro delete')
     }
   }
-
+  
   useEffect(() => {
     formRef.current?.setFocus('title') 
   }, [])
@@ -72,35 +74,31 @@ export function BookDetails() {
         <main className={styles.formContainer}>
         <Form onSubmit={handleSubmit} ref={formRef}>
           <div className={styles.formGroup}>
-            <label htmlFor="title">Título</label>
             <InputText
               id='title' 
               name='title'
               type="text" 
-              value={title}
-              onChange={(ev: ChangeEvent<HTMLInputElement>) => setTitle(ev.target.value)}
+              label='Título'
             />
           </div>
          
 
           <div className={styles.formGroup}>
-            <label htmlFor="author">Autor</label>
-            <input 
+            <InputText
               id='author' 
+              name='author'
               type="text"
-              value={author}
-              onChange={(ev) => setAuthor(ev.target.value)}
+              label='Autor'
             />
           </div>
           
           <div className={styles.formUnit}>
             <div className={styles.formGroup}>
-              <label htmlFor="amount">Quantidade</label>
-              <input 
+              <InputText 
                 id='amount' 
+                name='amount'
                 type="number" 
-                value={amount}
-                onChange={(ev) => setAmount(Number(ev.target.value))}
+                label='Quantidade'
               />
             </div>
           </div>
