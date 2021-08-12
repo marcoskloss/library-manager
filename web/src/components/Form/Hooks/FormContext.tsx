@@ -1,15 +1,18 @@
-import { createContext, forwardRef, ForwardRefRenderFunction, ReactNode, useContext, useImperativeHandle, useRef } from 'react' 
+import { createContext, forwardRef, ForwardRefRenderFunction, ReactNode, useContext, useImperativeHandle, useRef, useState } from 'react' 
+import { ValidationError } from 'yup'
 
 interface IFormContext {
   register: (field: IFormField) => void
   setValue: (name: string, value: any) => boolean,
   setFocus: (name: string) => boolean
+  errors: IFormError
 }
 
 interface IFormProviderProps {
   children: ReactNode
 }
 
+type IFormError = Record<string, string>
 
 export interface IFormRef {
   register: (field: IFormField) => void
@@ -17,6 +20,8 @@ export interface IFormRef {
   setFocus: (name: string) => boolean
   getValue<T = any>(name: string): T | undefined
   getData<T = any>(): T
+  setFormErrors: (data: ValidationError) => void
+  setFormError: (name: string | undefined, message: string) => void
 }
 
 interface IFormField {
@@ -30,6 +35,7 @@ const FormContextProviderElement: ForwardRefRenderFunction<
   IFormRef, IFormProviderProps
   > = ( { children }, formRef) =>  {
   const formFields = useRef<IFormField[]>([])
+  const [ errors, setErrors ] = useState<IFormError>({})
 
   function getFieldByName( name: string): IFormField | undefined {
     return formFields.current.find(item => item.name === name)
@@ -74,19 +80,35 @@ const FormContextProviderElement: ForwardRefRenderFunction<
     return getFieldByName(name)?.ref.current?.value
   }
 
+  function setFormError(name: string | undefined, message: string): void {
+    if (!name) return
+
+    setErrors(prevState => {
+      prevState[name] = message
+      return { ...prevState }
+    })
+}
+
+  function setFormErrors(data: ValidationError): void {
+    data.inner.forEach(error => setFormError(error.path, error.message))
+   }
+
   useImperativeHandle<{}, IFormRef>(formRef, () => ({
     register,
     setValue,
     setFocus,
     getValue,
-    getData
+    getData,
+    setFormError,
+    setFormErrors
   }))
 
   return (
     <FormContext.Provider value={{
       register,
       setValue,
-      setFocus
+      setFocus,
+      errors
     }}>
       { children }
     </FormContext.Provider>
