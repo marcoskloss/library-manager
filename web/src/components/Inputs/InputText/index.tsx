@@ -1,5 +1,6 @@
-import {InputHTMLAttributes, useEffect, useRef} from "react";
-import {useForm} from "../../Form/Hooks/FormContext";
+import {InputHTMLAttributes, useEffect, useRef} from "react"
+import {useForm} from "../../Form/Hooks/FormContext"
+import baseInput from '../input.module.scss'
 
 interface IInputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
@@ -10,6 +11,7 @@ export function InputText({ name, label, ...rest }: IInputTextProps) {
   const { register, errors } = useForm()
 
   const ref = useRef<HTMLInputElement>(null)
+  const errorMessage = errors[name]
 
   useEffect(() => {
     register({ ref, name })
@@ -18,9 +20,14 @@ export function InputText({ name, label, ...rest }: IInputTextProps) {
   return (
     <>
       <label htmlFor={name}>{ label }</label>
-      <input id={name} ref={ref} {...rest} />
-      { errors[name] && (
-        <span>{ errors[name] }</span>
+      <input 
+        type='text'
+        id={name} 
+        ref={ref} 
+        {...rest} 
+      />
+      { errorMessage  && (
+        <span className={baseInput.errorSpan}>{ errorMessage }</span>
       )}
     </>
   )

@@ -59,7 +59,6 @@ const FormContextProviderElement: ForwardRefRenderFunction<
   function getData<T = any>(): T {
     const data: T = {} as T 
     formFields.current.forEach(field => {
-      console.log(field)
       Object.defineProperty(data, field.name, {
         value: field.ref.current?.value
       })
