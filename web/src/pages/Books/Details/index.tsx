@@ -8,6 +8,7 @@ import { Header } from '../../../components/Header'
 import { Form } from '../../../components/Form'
 import { InputText } from '../../../components/Inputs/InputText'
 import {IFormRef} from '../../../components/Form/Hooks/FormContext'
+import {InputNumber} from '../../../components/Inputs/InputNumber'
 
 interface IParams {
   id: string
@@ -77,7 +78,6 @@ export function BookDetails() {
             <InputText
               id='title' 
               name='title'
-              type="text" 
               label='Título'
             />
           </div>
@@ -87,17 +87,15 @@ export function BookDetails() {
             <InputText
               id='author' 
               name='author'
-              type="text"
               label='Autor'
             />
           </div>
           
           <div className={styles.formUnit}>
             <div className={styles.formGroup}>
-              <InputText 
+              <InputNumber
                 id='amount' 
                 name='amount'
-                type="number" 
                 label='Quantidade'
               />
             </div>
