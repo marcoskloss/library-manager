@@ -27,7 +27,7 @@ export function BookDetails() {
   async function handleSubmit(): Promise<void> {
     try {
       const data = formRef.current?.getData()
-
+      
       const schema = yup.object().shape({
         title: yup.string().required('O Título é obrigatório!'),
         author: yup.string().required('O Autor é obrigatório!'),
@@ -79,6 +79,7 @@ export function BookDetails() {
               id='title' 
               name='title'
               label='Título'
+              placeholder='Título'
             />
           </div>
          
@@ -88,6 +89,7 @@ export function BookDetails() {
               id='author' 
               name='author'
               label='Autor'
+              placeholder='Autor'
             />
           </div>
           
@@ -97,6 +99,8 @@ export function BookDetails() {
                 id='amount' 
                 name='amount'
                 label='Quantidade'
+                placeholder='1'
+                defaultValue={1}
               />
             </div>
           </div>
