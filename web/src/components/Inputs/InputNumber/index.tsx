@@ -5,9 +5,15 @@ import baseInput from '../input.module.scss'
 interface IInputNumberProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
   label: string
+  defaultValue?: number;
 }
 
-export function InputNumber({ name, label, ...rest }: IInputNumberProps) {
+export function InputNumber({
+  name, 
+  label, 
+  defaultValue,
+  ...rest 
+}: IInputNumberProps) {
   const { register, errors } = useForm()
 
   const ref = useRef<HTMLInputElement>(null)
@@ -15,7 +21,7 @@ export function InputNumber({ name, label, ...rest }: IInputNumberProps) {
   
 
   useEffect(() => {
-    register({ ref, name })
+      register({ ref, name, defaultValue })
   }, [register, name])
 
   return (

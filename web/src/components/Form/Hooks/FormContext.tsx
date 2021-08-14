@@ -27,6 +27,7 @@ export interface IFormRef {
 interface IFormField {
   name: string
   ref: React.MutableRefObject<any>
+  defaultValue?: any;
 }
 
 const FormContext = createContext({} as IFormContext)
@@ -60,8 +61,10 @@ const FormContextProviderElement: ForwardRefRenderFunction<
     const data: T = {} as T 
     formFields.current.forEach(field => {
       Object.defineProperty(data, field.name, {
-        value: field.ref.current?.value
-      })
+        value: field.ref.current?.value ?
+          field.ref.current?.value :
+          field.defaultValue
+     })
     })
 
     return data 
@@ -76,7 +79,13 @@ const FormContextProviderElement: ForwardRefRenderFunction<
   }
 
   function getValue<T = any>(name: string): T | undefined {
-    return getFieldByName(name)?.ref.current?.value
+    const field =  getFieldByName(name)
+
+    if (!field) return undefined;
+
+    return field.ref.current?.value ?
+      field.ref.current.value :
+      field.defaultValue
   }
 
   function setFormError(name: string | undefined, message: string): void {
