@@ -1,8 +1,10 @@
-import React from 'react';
+import './styles/global.css';
+
+import { Public } from './pages/public/Public';
 
 function App() {
   return (
-    <div>Hi o/</div>
+    <Public />
   );
 }
 
