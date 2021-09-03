@@ -4,9 +4,24 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: 'Raleway', sans-serif;
+  color: #121212;
+}
+
+strong {
+  color: #4483f0;
+}
 
 .center {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
 }
