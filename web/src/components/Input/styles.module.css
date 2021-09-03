@@ -1,0 +1,44 @@
+.inputBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputBox:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.required::after {
+  content: '';
+  height: 4px;
+  width: 4px;
+  position: absolute;
+  margin-left: 3px;
+  top: 2px;
+  
+  background: #4483f0;
+  border-radius: 2px;
+}
+
+.inputBox label {
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.inputBox input {
+  padding: 10px;
+  border: 1px solid #bebebe;
+  border-radius: 4px;
+  outline-color: #4483f0;
+
+  transition: box-shadow .2s;
+}
+
+.inputBox input:hover {
+  box-shadow: 0 0 4px 1px #a0bef1;
+}
+
+.error {
+  color: #b00020;
+  font-size: 13px;
+  margin-top: 3px;
+}
