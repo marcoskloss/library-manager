@@ -4,14 +4,17 @@ import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
 import * as validate from '../../../data/validations';
 import { IFieldError } from '../../../data/errors';
+import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
-export function SignIn() {
-  const [password, setPassword] = useState('')
+export function SignUp() {
+  const history = useHistory();
+  
+  const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [error, setError] = useState<IFieldError>()
+  const [error, setError] = useState<IFieldError>();
   
   function handleSubmit(ev: React.FormEvent<HTMLFormElement>): void {
-    
     ev.preventDefault();
 
     if (!validate.validateEmail(email)) {
@@ -30,16 +33,16 @@ export function SignIn() {
       return;
     }
 
-    setError(undefined)
+    setError(undefined);
     
-    alert('o/');
+    history.push('/home');
   }
   
   return (
     <div className={styles.registrationContainer}>
       <div className={styles.formBox}>
         <header>
-          <h1>Bem-vindo novamente!</h1> 
+          <h1>Bem-vindo!</h1> 
           <p>Entre no nosso <strong>Secret Club</strong></p>
         </header>
 
@@ -60,6 +63,12 @@ export function SignIn() {
             error={error?.field === 'password' ? error : undefined}
             onChange={(ev) => setPassword(ev.target.value)}
           />
+
+          <small>
+            <Link to='/sign-in'>
+              Já possui uma conta?
+            </Link>
+          </small>
           <Button title='Entrar' type='submit' />
         </form>
       </div>

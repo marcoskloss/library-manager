@@ -1,8 +1,8 @@
-import { SignIn } from "./SignIn";
+import { SignUp } from "./SignUp";
 
 export function Public() {
   return (
-    <SignIn />
+    <SignUp />
   );
 }
 
