@@ -13,6 +13,16 @@ strong {
   color: #4483f0;
 }
 
+a {
+  text-decoration: none;
+  color: #4483f0;
+  transition: color .2s;
+}
+
+a:hover {
+  color: #3166c2;
+}
+
 .center {
   display: flex;
   align-items: center;

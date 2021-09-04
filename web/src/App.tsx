@@ -1,10 +1,13 @@
 import './styles/global.css';
 
-import { Public } from './pages/public/Public';
+import { Routes } from './Routes';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
-    <Public />
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
   );
 }
 
