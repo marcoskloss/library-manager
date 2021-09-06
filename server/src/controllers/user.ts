@@ -10,7 +10,7 @@ export class UserController {
     if (userAlreadyExists) return res.json({ error: 'User already exists!' });
 
     await database.set({ email, password });
-    return res.status(201);
+    return res.status(201).json({ email });
   }
 
   public async authenticate(req: Request, res: Response): Promise<Response> {
