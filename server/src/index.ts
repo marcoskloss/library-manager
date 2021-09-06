@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import database, { seedDatabase } from './database';
+import { authMiddleware } from './middlewares/auth';
 import { router } from './routes';
 
 function allowCrossDomain(
@@ -23,6 +24,10 @@ function allowCrossDomain(
   await seedDatabase(database);
 
   app.use(router);
+
+  app.get('/', authMiddleware, async (_: Request, res: Response): Promise<Response> => {
+    return res.send('private info');
+  });
 
   app.listen(3333, () => console.log('Its alive!'));
 })();
