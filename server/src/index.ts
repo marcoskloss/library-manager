@@ -25,7 +25,11 @@ function allowCrossDomain(
 
   app.use(router);
 
-  app.get('/', authMiddleware, async (_: Request, res: Response): Promise<Response> => {
+  app.get('/public', async (_: Request, res: Response): Promise<Response> => {
+    return res.send('public info');
+  });
+
+  app.get('/private', authMiddleware, async (_: Request, res: Response): Promise<Response> => {
     return res.send('private info');
   });
 
