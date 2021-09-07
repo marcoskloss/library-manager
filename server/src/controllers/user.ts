@@ -29,4 +29,9 @@ export class UserController {
     const token = AuthService.generateToken(user);
     return res.json({ token, user })
   }
+
+  public async listUsers(_: Request, res: Response): Promise<Response> {
+    const users = await database.findAllUsers();
+    return res.json(users);
+  }
 }

@@ -44,6 +44,10 @@ class Database implements IDatabase {
     if (!user) return Promise.resolve(null);
     return Promise.resolve({ ...user });
   }
+
+  public async findAllUsers(): Promise<string[]> {
+    return Promise.resolve(this.users.map(user => { return user.email }));
+  }
 }
 
 export default new Database();
