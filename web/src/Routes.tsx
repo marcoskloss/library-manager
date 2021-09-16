@@ -1,31 +1,29 @@
-import { 
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  RouteProps
-} from 'react-router-dom';
+import { Switch, Route, RouteProps } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
 import { Home } from './pages/Home';
-import { Public } from './pages/public/Public';
+import { SignIn } from './pages/public/SignIn';
+import { SignUp } from './pages/public/SignUp';
 
 interface ICustomRouteProps extends RouteProps {
   isPrivate?: boolean
 }
 
 function CustomRoute({ isPrivate, ...rest }: ICustomRouteProps) {
-  if (!isPrivate) return <Route {...rest} component={Public} />
+  const { isAuthenticated } = useAuth();
   
-  //validate
+  if (!isPrivate ) {
+    return <Route {...rest} component={SignIn} />
+  } 
+  
   return <Route {...rest} />
 }
 
 export function Routes() {
   return (
-    <Router>
-      <Switch>
-        <CustomRoute exact path='/sign-in' component={Public} />
-        <CustomRoute exact path='/sign-up' component={Public} />
-        <CustomRoute isPrivate exact path='/home' component={Home} />
-      </Switch>
-    </Router>
+    <Switch>
+      <CustomRoute exact path='/sign-in' component={SignIn} />
+      <CustomRoute exact path='/sign-up' component={SignUp} />
+      <CustomRoute isPrivate exact path='/home' component={Home} />
+    </Switch>
   );
 }

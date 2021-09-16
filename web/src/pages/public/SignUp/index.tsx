@@ -4,17 +4,17 @@ import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
 import * as validate from '../../../data/validations';
 import { IFieldError } from '../../../data/errors';
-import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
 
 export function SignUp() {
-  const history = useHistory();
+  const { signUp } = useAuth();
   
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState<IFieldError>();
   
-  function handleSubmit(ev: React.FormEvent<HTMLFormElement>): void {
+  async function handleSubmit(ev: React.FormEvent<HTMLFormElement>): Promise<void> {
     ev.preventDefault();
 
     if (!validate.validateEmail(email)) {
@@ -35,7 +35,7 @@ export function SignUp() {
 
     setError(undefined);
     
-    history.push('/home');
+    await signUp({ email, password });
   }
   
   return (

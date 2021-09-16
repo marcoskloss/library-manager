@@ -4,13 +4,15 @@ import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
 import * as validate from '../../../data/validations';
 import { IFieldError } from '../../../data/errors';
+import { useAuth } from '../../../context/AuthContext';
 
 export function SignIn() {
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('');
   const [error, setError] = useState<IFieldError>()
+  const { signIn } = useAuth()
   
-  function handleSubmit(ev: React.FormEvent<HTMLFormElement>): void {
+  async function handleSubmit(ev: React.FormEvent<HTMLFormElement>): Promise<void> {
     
     ev.preventDefault();
 
@@ -32,7 +34,7 @@ export function SignIn() {
 
     setError(undefined)
     
-    alert('o/');
+    await signIn({ email, password })
   }
   
   return (
@@ -43,7 +45,7 @@ export function SignIn() {
           <p>Entre no nosso <strong>Secret Club</strong></p>
         </header>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={async (ev) => await handleSubmit(ev)}>
           <Input 
             name='email' 
             label='Email' 
