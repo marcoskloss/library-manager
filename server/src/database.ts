@@ -12,16 +12,12 @@ interface IDatabase {
 }
 
 export async function seedDatabase(db: IDatabase): Promise<void> {
-  db.set({
-    email: 'joao@email.com',
-    password: (await AuthService.hashPassword('123456'))
-  });
-
-  db.set({
-    email: 'maria@email.com',
-    password: (await AuthService.hashPassword('123456'))
-  });
-
+  console.log('seed database with')
+  console.table({
+    email: 'marcos@email.com',
+    password: '123456'
+  })
+  
   db.set({
     email: 'marcos@email.com',
     password: (await AuthService.hashPassword('123456'))

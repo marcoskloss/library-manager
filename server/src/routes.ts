@@ -7,6 +7,8 @@ const userController = new UserController();
 
 router.post('/users', userController.create);
 router.post('/users/authenticate', userController.authenticate);
-router.get('/users', authMiddleware, userController.listUsers)
+router.get('/users', authMiddleware, userController.listUsers);
+router.post('/users', userController.create);
+router.get('/me', userController.me);
 
 export { router };
