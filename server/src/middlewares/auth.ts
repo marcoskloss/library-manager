@@ -6,7 +6,7 @@ export function authMiddleware(
   res: Response,
   next: NextFunction
 ): void {
-  const authHeader = req.headers?.['Authorization'];
+  const authHeader = req.headers['Authorization'];
   if (!authHeader) return res.status(401).end();
   const [, token] = String(authHeader).split(' ');
 
@@ -14,7 +14,8 @@ export function authMiddleware(
     const decoded = AuthService.decodeToken(token);
     req.user_email = decoded.email;
     next();
-  } catch (err: any) {
-    res.status(401).json({ error: err.message });
+  } catch (err) {
+    const error = err as Error;
+    res.status(401).json({ error: error.message });
   }
 }
