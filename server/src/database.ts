@@ -5,23 +5,22 @@ export interface IUser {
   password: string;
 }
 
-interface IDatabase {
+export interface IDatabase {
   users: IUser[];
   set: (user: IUser) => Promise<void>;
   get: (email: string) => Promise<IUser | null>
 }
 
-export async function seedDatabase(db: IDatabase): Promise<void> {
-  console.log('seed database with')
-  console.table({
-    email: 'marcos@email.com',
-    password: '123456'
-  })
+export async function seedDatabase(db: IDatabase, userSeeds: IUser[]): Promise<void> {
+  const hashedPasswords = await Promise.all(userSeeds.map(user => {
+    return AuthService.hashPassword(user.password);
+  }))
   
-  db.set({
-    email: 'marcos@email.com',
-    password: (await AuthService.hashPassword('123456'))
-  });
+  const promises = userSeeds.map(user => {
+    return db.set({...user});
+  })
+
+  await Promise.all(promises);
 }
 
 class Database implements IDatabase {

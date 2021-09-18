@@ -21,7 +21,9 @@ function allowCrossDomain(
   app.use(express.json());
   app.use(allowCrossDomain);
   
-  await seedDatabase(database);
+  await seedDatabase(database, [
+    { email: 'marcos@email.com', password: '123456' }
+  ]);
 
   app.use(router);
 
