@@ -17,9 +17,9 @@
     "build": "tsc",
     "start": "yarn build && node dist/src/index.js",
     "dev": "ts-node-dev --transpile-only 'src/index.ts'",
-    "test": "jest --runInBand",
-    "test:watch": "jest --watch --runInBand",
-    "test:cov": "jest --no-cache --runInBand --coverage"
+    "test": "jest --runInBand --silent",
+    "test:watch": "jest --watch --runInBand --silent",
+    "test:cov": "jest --no-cache --runInBand --coverage --silent"
   },
   "dependencies": {
     "@types/express": "^4.17.13",
