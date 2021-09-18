@@ -4,19 +4,14 @@ import AuthService from "../services/auth";
 
 export class UserController {
   public async create(req: Request, res: Response): Promise<Response> {
-    console.log('CREATE USER')
     const { email, password } = req.body as IUser;
 
     const userAlreadyExists = await database.get(email);
     if (userAlreadyExists) {
-      console.log('user already exists')
-      console.log({ email, password })
       return res.json({ error: 'User already exists!' });
     }
 
     await database.set({ email, password });
-
-    console.log('user created', { email, password })
     
     return res.status(201).json({ email });
   }
