@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt, { JsonWebTokenError } from 'jsonwebtoken';
-import { IUser } from '../../database';
-import AuthService from '../../services/auth';
+import { IUser } from '../../../database';
+import AuthService from '../../../services/auth';
 
 describe('AuthService', () => {
   test('hashPassword', async () => {
