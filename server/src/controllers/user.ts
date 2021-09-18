@@ -8,7 +8,7 @@ export class UserController {
 
     const userAlreadyExists = await database.get(email);
     if (userAlreadyExists) {
-      return res.json({ error: 'User already exists!' });
+      return res.status(409).json({ error: 'User already exists!' });
     }
 
     await database.set({ email, password });
@@ -22,11 +22,11 @@ export class UserController {
     const user = await database.get(email);
 
     if (!user) {
-      return res.json({ error: 'Email/Password does not match!' });
+      return res.status(403).json({ error: 'Email/Password does not match!' });
     }
 
     if (!(await AuthService.comparePassword(password, user.password))) {
-      return res.json({ error: 'Email/Password does not match!' });
+      return res.status(403).json({ error: 'Email/Password does not match!' });
     }
 
     const token = AuthService.generateToken(user);
