@@ -26,6 +26,9 @@ module.exports = {
   watchPathIgnorePatterns: ['node_modules'],
   transformIgnorePatterns: ['node_modules'],
   collectCoverageFrom: [
-    'src/**/*.ts','!src/**/index.ts, !src/types.d.ts'
+    'src/**/*.ts',
+    '!src/**/index.ts', 
+    '!src/types.d.ts',
+    '!src/routes.ts'
   ]
 }
