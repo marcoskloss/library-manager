@@ -11,15 +11,15 @@ Essa app foi feita como base para um estudo sobre o funcionamento básico de aut
 ```bash
 
     # Clonar o repositório
-    $ git clone https://github.com/secret-club.git
+    $ git clone https://github.com/marcoskloss/secret-club.git
 
     # Entrar no diretório
     $ cd secret-club
 
-    # Instalando as dependencias com Yarn no server
+    # Instalando as dependências com Yarn no server
     $ cd server; yarn install
     
-    # Instalando as dependencias com Yarn no web
+    # Instalando as dependências com Yarn no web
     $ cd web; yarn install
     
     # Executando a app server (dentro do diretório do 'server')
