@@ -6,7 +6,8 @@ export function authMiddleware(
   res: Response,
   next: NextFunction
 ): void {
-  const authHeader = req.headers['Authorization'];
+  const authHeader = req.headers['authorization'];
+  
   if (!authHeader) return res.status(401).end();
   const [, token] = String(authHeader).split(' ');
 

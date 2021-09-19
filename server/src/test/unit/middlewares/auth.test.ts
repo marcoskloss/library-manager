@@ -25,7 +25,7 @@ describe('AuthMiddleware', () => {
     const decodeTokenSpy = jest.spyOn(AuthService, 'decodeToken')
       .mockReturnValueOnce({ email: 'mail@mail.com' });
 
-    request.headers['Authorization'] = 'Bearer access-token';
+    request.headers['authorization'] = 'Bearer access-token';
 
     authMiddleware(request, response, next);
     expect(request.user_email).toBe('mail@mail.com');
@@ -46,7 +46,7 @@ describe('AuthMiddleware', () => {
         throw new Error('Token error');
       });
 
-    request.headers['Authorization'] = 'Bearer access-token';
+    request.headers['authorization'] = 'Bearer access-token';
 
     authMiddleware(request, response, next);
     
