@@ -1,4 +1,5 @@
-import { Switch, Route, RouteProps } from 'react-router-dom';
+import { Switch, Route, RouteProps, Redirect } from 'react-router-dom';
+import { Loading } from './components/Loading';
 import { useAuth } from './context/AuthContext';
 import { Home } from './pages/Home';
 import { SignIn } from './pages/public/SignIn';
@@ -9,11 +10,19 @@ interface ICustomRouteProps extends RouteProps {
 }
 
 function CustomRoute({ isPrivate, ...rest }: ICustomRouteProps) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, loading } = useAuth();
   
-  if (!isPrivate ) {
-    return <Route {...rest} component={SignIn} />
+  if (loading) {
+    return <Loading />
+  }
+  
+  if (isPrivate && !isAuthenticated) {
+    return <Redirect to='/sign-in' />
   } 
+
+  if (!isPrivate && isAuthenticated) {
+    return <Redirect to='/home' />
+  }
   
   return <Route {...rest} />
 }
@@ -24,6 +33,8 @@ export function Routes() {
       <CustomRoute exact path='/sign-in' component={SignIn} />
       <CustomRoute exact path='/sign-up' component={SignUp} />
       <CustomRoute isPrivate exact path='/home' component={Home} />
+
+      <CustomRoute exact path='/' component={SignIn} />
     </Switch>
   );
 }

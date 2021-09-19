@@ -5,6 +5,7 @@ import { Button } from '../../../components/Button';
 import * as validate from '../../../data/validations';
 import { IFieldError } from '../../../data/errors';
 import { useAuth } from '../../../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 export function SignIn() {
   const [password, setPassword] = useState('')
@@ -62,6 +63,12 @@ export function SignIn() {
             error={error?.field === 'password' ? error : undefined}
             onChange={(ev) => setPassword(ev.target.value)}
           />
+
+          <small>
+            <Link to='/sign-up'>
+              Ainda não possui uma conta?
+            </Link>
+          </small>
           <Button title='Entrar' type='submit' />
         </form>
       </div>

@@ -43,7 +43,7 @@ export function SignUp() {
       <div className={styles.formBox}>
         <header>
           <h1>Bem-vindo!</h1> 
-          <p>Entre no nosso <strong>Secret Club</strong></p>
+          <p>Crie uma conta e entre no nosso <strong>Secret Club</strong></p>
         </header>
 
         <form onSubmit={handleSubmit}>
