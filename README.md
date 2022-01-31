@@ -2,7 +2,7 @@
 
 Essa app foi feita como base para um estudo sobre o funcionamento básico de autenticação por meio de tokens jwt.
 
-## Teconologias
+## Tecnologias
 - NodeJs com Express
 - ReactJs
 
